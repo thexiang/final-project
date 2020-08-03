@@ -6,4 +6,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose --version
 
 sudo apt install ca-certificates curl openssh-server ufw apt-transport-https -y
+sudo sysctl -w vm.max_map_count=262144
+
 sudo docker-compose up -d
