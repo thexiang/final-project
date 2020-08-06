@@ -5,5 +5,6 @@ sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose --version
 
+sudo sysctl -w vm.max_map_count=262144
 
-sudo docker-compose up
+sudo docker-compose up -d
