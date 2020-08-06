@@ -1,21 +1,19 @@
-version: '3'
+version: '3.8'
 
 services:
   web:
     image: 'gitlab/gitlab-ce:latest'
-    container_name: 'project-gitlab'
     restart: always
-    hostname: 'localhost'
     ports:
       - '880:80'
       - '8443:443'
       - '822:22'
     volumes:
-      - '/srv/gitlab/config:/etc/gitlab'
-      - '/srv/gitlab/logs:/var/log/gitlab'
-      - '/srv/gitlab/data:/var/opt/gitlab'
+      - gitlab_config:/etc/gitlab
+      - gitlab_log:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
   sonarqube:
-    image: sonarqube:7.9.2-community
+    image: sonarqube
     restart: unless-stopped
     ports:
       - "9000:9000"
@@ -32,7 +30,7 @@ services:
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
 
   db:
-    image: postgres:12.1
+    image: postgres
     restart: unless-stopped
     networks:
       - sonarnet
@@ -48,6 +46,9 @@ networks:
     driver: bridge
 
 volumes:
+  gitlab_config:
+  gitlab_log:
+  gitlab_data:
   sonarqube_conf:
   sonarqube_data:
   sonarqube_extensions:
